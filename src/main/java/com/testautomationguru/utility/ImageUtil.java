@@ -3,6 +3,7 @@ package com.testautomationguru.utility;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.imageio.ImageIO;
@@ -11,6 +12,10 @@ class ImageUtil {
 	
 	static Logger logger = Logger.getLogger(ImageUtil.class.getName());
 	
+	static void setLogLevel(Level level) {
+		logger.setLevel(level);
+	}
+
 	static boolean compareAndHighlight(final BufferedImage img1, final BufferedImage img2, String fileName, boolean highlight, int colorCode) throws IOException {
 
 	    final int w = img1.getWidth();

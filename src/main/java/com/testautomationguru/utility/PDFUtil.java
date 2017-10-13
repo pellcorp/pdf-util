@@ -19,6 +19,13 @@ import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.FileVisitResult;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.SimpleFileVisitor;
+import java.nio.file.attribute.BasicFileAttributes;
+import java.nio.file.attribute.FileAttribute;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -78,7 +85,9 @@ public class PDFUtil {
    * It is set to Level.OFF by default.
    */
 	public void enableLog(){
+		setLogLevel(Level.INFO);
 		logger.setLevel(Level.INFO);
+		
 	}
 
    /**
@@ -103,6 +112,7 @@ public class PDFUtil {
    */
 	public void setLogLevel(java.util.logging.Level level){
 		logger.setLevel(level);
+		ImageUtil.setLogLevel(level);
 	}
 		
    /**
@@ -577,9 +587,9 @@ public class PDFUtil {
 		}
 	}
 	
-	private boolean createFolder(String file) throws IOException{
-		FileUtils.deleteDirectory(new File(file));
-		return new File(file).mkdir();
+	private boolean createFolder(String dir) throws IOException{
+	    FileUtils.deleteDirectory(new File(dir));
+		return new File(dir).mkdir();
 	}
 	
 	private String getFileName(String file){
